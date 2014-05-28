@@ -25,6 +25,7 @@ mkdir data/
 cd data/
 unzip /path/to/pmdacasereportXXYY.zip
 nkf -w --overwrite *.csv
+sed -ie '1d' *.csv
 sed -ie 's/,/\$/g' *.csv
 awk -F \" '{ sub(/\$/, ",", $2); if (NF == 3) print $1"\""$2"\""$3; else print $1 }' drug20XXYY.csv > drug.utf8
 rm drug20XXYY.csv
