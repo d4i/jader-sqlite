@@ -1,5 +1,5 @@
 -- JADER
--- sql script to create tables and indexes
+-- sql script to create tables and indices
 
 CREATE TABLE demo (
   case_id CHAR(10) NOT NULL unique,
