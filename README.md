@@ -12,23 +12,22 @@ Preparation
 
 ```sh
 $ git clone https://github.com/dceoy/jader-sqlite.git
-$ cd jader-sqlite/raw
-$ unzip /path/to/pmdacasereport20????.zip
-$ cd ..
+$ cd jader-sqlite
 ```
 
 Automated Migration
 -------------------
 
 ```sh
-$ ./migrate.sh
+$ ./migrate.sh /path/to/pmdacasereport20????.zip
 ```
 
 Manual Migration
 ----------------
 
 ```sh
-$ mkdir seed/ db/
+$ mkdir raw/ seed/ db/
+$ unzip /path/to/pmdacasereport20????.zip -d raw/
 $ awk '$1 == "-" { print $2 }' table_list.yml \
     | xargs -I {} bash -c 'nkf -w raw/{}20????.csv | tail -n +2 | csvformat -d , -D $ -b > seed/{}.utf8'
 $ cat schema_jader.sql | sqlite3 db/jader.sqlite3
