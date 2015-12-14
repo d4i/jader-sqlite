@@ -7,7 +7,12 @@ JDR_DB="db/jader.sqlite3"
 JDR_DB_DUMP_GZ="db/dump_jader.sql.gz"
 JDR_TABLES=$(awk '$1 == "-" { print $2 }' table_list.yml)
 
-echo "> extracting files"
+echo "> checking required system commands."
+which csvformat
+which nkf
+which sqlite3
+
+echo "> extracting files."
 if [[ ${#} -eq 1 ]] && [[ ${1} =~ ^.*\.zip$ ]]; then
   [[ -d raw/ ]] || mkdir raw/
   unzip ${1} -d raw/
@@ -20,11 +25,6 @@ ls raw/*.csv
 if [[ ! ${?} -eq 0 ]]; then
   echo "CSV files not found." && exit 1
 fi
-
-echo "> checking required system commands."
-which csvformat
-which nkf
-which sqlite3
 
 echo "> creating the database."
 if [[ ! -f ${JDR_DB} ]]; then

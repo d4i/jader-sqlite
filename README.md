@@ -19,7 +19,7 @@ Automated Migration
 -------------------
 
 ```sh
-$ ./migrate.sh /path/to/pmdacasereport20????.zip
+$ ./migrate /path/to/pmdacasereport20????.zip
 ```
 
 Manual Migration
