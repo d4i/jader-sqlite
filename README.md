@@ -3,17 +3,38 @@ JADER-SQLite
 
 Using JADER (Japanese Adverse Drug Event Report) with SQLite3
 
-| JADER version | OS              | Depends              |
-|:-------------:|:---------------:|:--------------------:|
-| Nov. 2015     | Linux, Mac OS X | SQLite3, NKF, CSVKit |
+Supported JADER version: Nov. 2015
 
 Preparation
 -----------
 
-```sh
-$ git clone https://github.com/dceoy/jader-sqlite.git
-$ cd jader-sqlite
-```
+1.  Install SQLite3, NKF, and CSVKit
+
+    ```sh
+    # Ubuntu
+    $ sudo apt-get -y install sqlite3 nkf python-pip
+    $ sudo pip install csvkit
+
+    # CentOS
+    $ sudo yum -y install sqlite nkf python-pip
+    $ sudo pip install csvkit
+
+    # Fedora
+    $ sudo dnf -y install sqlite nkf python-pip
+    $ sudo pip install csvkit
+
+    # Homebrew on MacOSX
+    $ brew install sqlite nkf
+    $ sudo easy_install pip
+    $ sudo pip install -U csvkit
+    ```
+
+2.  Check out `jader-sqlite`
+
+    ```sh
+    $ git clone https://github.com/dceoy/jader-sqlite.git
+    $ cd jader-sqlite
+    ```
 
 Automated Migration
 -------------------
