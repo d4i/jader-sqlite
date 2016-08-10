@@ -24,7 +24,7 @@ Preparation
     $ sudo pip install csvkit
 
     # Homebrew on MacOSX
-    $ brew install sqlite nkf
+    $ brew install gnu-sed sqlite nkf
     $ sudo easy_install pip
     $ sudo pip install -U csvkit
     ```
@@ -36,23 +36,12 @@ Preparation
     $ cd jader-sqlite
     ```
 
-Automated Migration
--------------------
+Migration
+---------
+
+`create_db.sh` create an SQLite3 database in `db` directory and migrate data to it.  
+Run `./create_db.sh --help` for the usage on a command.
 
 ```sh
-$ ./migrate /path/to/pmdacasereport20????.zip
-```
-
-Manual Migration
-----------------
-
-```sh
-$ mkdir raw/ seed/ db/
-$ unzip /path/to/pmdacasereport20????.zip -d raw/
-$ awk '$1 == "-" { print $2 }' table_list.yml \
-    | xargs -I {} bash -c 'nkf -w raw/{}20????.csv | tail -n +2 | csvformat -d , -D $ -b > seed/{}.utf8'
-$ cat schema_jader.sql | sqlite3 db/jader.sqlite3
-$ awk '$1 == "-" { print $2 }' table_list.yml \
-    | xargs -I {} sqlite3 -separator $ db/jader.sqlite3 '.import seed/{}.utf8 {}'
-$ sqlite3 db/jader.sqlite3 '.dump' | gzip - > db/dump_jader.sql.gz
+$ ./create_db.sh --zip /path/to/pmdacasereport20????.zip
 ```
